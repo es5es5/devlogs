@@ -6,17 +6,18 @@
 >
 > *"에디터에 사진을 추가했더니 게시글 데이터가 미친듯이 올라갔어요 !"*
 
-## 1. Situation
+## 1. Situation 🔍
 [Summernote](https://summernote.org/) 를 비롯한 대부분의 오픈소스 위지위그 에디터에 이미지를 첨부하면 **base64로 인코딩** 되면서 첨부된다.<br>
 단순한 이미지 1개를 첨부한게 위 상황이다.
 
-## 2. Issue
+<s>저런게 2개, 3개.. 10개 이상이라면..?</s> 🤮
 
-저렇게 엄청난 문자열 데이터를 **데이터베이스에 저장하는 것 자체도 문제**인데,
+## 2. Issue 💢
 
-http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때문에 **통신 자체가 안되는 경우**까지도 생긴다.
+저렇게 엄청난 문자열 데이터를 데이터 베이스에 때려 넣는 것도 썩 좋지 않은데,
+RDB(MySQL)인 경우 **데이터베이스 맥스 패킷이 초과**돼서 SELECT를 할 수 없는 상황이 발생된다.
 
-## 3. Solution
+## 3. Solution 🔨
 해결방법은 여러가지다.
 
 1. MySQL 컨텐츠 필드 데이터 타입을 (varchar, Text, LongText) -> **Blob** 으로 변경
@@ -25,7 +26,7 @@ http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때
 
 우리가 알아볼 방법은 세번째 방법이다.
 
-## 4. Process
+## 4. Process 📑
 간단한 프로세스는 이렇다.
 
 1. 이미지 첨부
@@ -34,7 +35,7 @@ http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때
 
 ### 4-1. support
 "이미지 태그로 치환" 이 부분은 에디터단에서 지원해주는게 중요하다.<br>
-만약 위 프로세스대로 진행하려는데, 에디터에서 해당 기능을 지원해주지 않는다면.. <s>매우 고생할 것이다.</s><br>  🤦
+만약 위 프로세스대로 진행하려는데, 에디터에서 해당 기능을 지원해주지 않는다면.. <s>매우 고생할 것이다.</s><br>  🤦🤦‍♂️
 
 그렇기 때문에 시중에 있는 오픈소스 위지위그 에디터를 채택할 때 **해당 기능을 지원 해주는지 반드시 고려**해봐야한다.
 
@@ -48,6 +49,7 @@ http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때
 # HOW TO
 이번 일지에선 두 가지 에디터에서 내가 개발한 방식을 소개한다.
 
+<hr>
 ## 1. Summernote
 
 #### Just Try it !
@@ -108,9 +110,9 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 21. },
 ```
 
-**Line 2.** 에디터를 DOM(*#editor*)에 집어넣는다.<br>
-**Line 4 - 11.** 해당 에디터가 생성될 때 갖게 될 옵션(*사이즈, 언어, 콜백 등*)들을 나열한다.<br>
-**Line 14.** 우리는 이미지 업로드 콜백 메소드(*onImageUpload*)를 사용한다.<br>
+**Line 2.** 에디터를 DOM(#editor)에 집어넣는다.<br>
+**Line 4 - 11.** 해당 에디터가 생성될 때 갖게 될 옵션(사이즈, 언어, 콜백 등)들을 나열한다.<br>
+**Line 14.** 우리는 이미지 업로드 콜백 메소드(onImageUpload)를 사용한다.<br>
 
 #### onImageUpload callback method
 ```js
@@ -145,14 +147,14 @@ uploadImagesService (file, editor) {
   let data = new FormData()
   data.append('uploadFile', file)
 
-  let apiURL = `${이미지서버}/common/smartimage`
+  let apiURL = `${이미지_서비스}/common/smartimage`
 
   this.$axios({
     method: 'post',
     url: apiURL,
     data
   }).then(result => {
-    $(editor).summernote('insertImage', `${this.ENV_HOMEPAGE}${result.data}`)
+    $(editor).summernote('insertImage', 이미지_URL)
   }).catch(error => {
     console.error(error)
   })
@@ -165,5 +167,9 @@ uploadImagesService (file, editor) {
 참 고마운 라이브러리다. 😁
 #### insertImage
 ```js
-$(editor).summernote('insertImage', [이미지_URL])
+$(editor).summernote('insertImage', 이미지_URL)
 ```
+
+<hr>
+
+## 2. Toast UI
