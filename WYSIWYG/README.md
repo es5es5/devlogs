@@ -7,7 +7,7 @@
 > *"에디터에 사진을 추가했더니 게시글 데이터가 미친듯이 올라갔어요 !"*
 
 ## 1. Situation
-[summernote](https://summernote.org/) 를 비롯한 대부분의 오픈소스 위지위그 에디터에 이미지를 첨부하면 **base64로 인코딩** 되면서 첨부된다.<br>
+[Summernote](https://summernote.org/) 를 비롯한 대부분의 오픈소스 위지위그 에디터에 이미지를 첨부하면 **base64로 인코딩** 되면서 첨부된다.<br>
 단순한 이미지 1개를 첨부한게 위 상황이다.
 
 ## 2. Problem
@@ -43,7 +43,7 @@
 
 #### Just Try it !
 [썸머노트 공식 홈페이지](https://summernote.org/)에서 이미지 업로드를 해보자.<br>
-base64로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br><br>
+*base64*로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br><br>
 
 썸머노트는 [onImageUpload 콜백 메소드](https://summernote.org/deep-dive/#onimageupload)로 이미지 업로드를 공식 지원해준다.
 
@@ -67,17 +67,17 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 });
 ```
 
-#### Summernote 코딩해보자
+#### Let's Summernote !
 
 이제 실제 코드로 썸머노트에 이미지 업로드 API 를 탑재해보자.
 
 간단한 프로세스는 이렇다.
 1. 썸머노트 에디터 생성
 2. 에디터 생성할 때 이미지 업로드 콜백 메소드를 옵션으로 추가
-3. 에디터에서 이미지업로드
-4. 이미지 서비스에서 리턴받은 경로를 이미지 태그(&lt;img src="[이미지 API GET URL]"&gt;)로 만들어서  에디터에 컨텐츠에 추가
+3. 사용자가 에디터에서 이미지 업로드
+4. 이미지 서비스에서 리턴받은 경로를 이미지 태그(**&lt;img src="[이미지 API GET URL]"&gt;**)로 만들어서  에디터에 컨텐츠에 추가
 
-참고로 썸머노트는 jQuery 기반으로 동작한다.
+참고로 썸머노트는 *jQuery* 기반으로 동작한다.
 
 ```js
  1. summernoteInit () {
@@ -99,11 +99,11 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 21. },
 ```
 
-Line 2. 에디터를 DOM(#editor)에 집어넣는다.
-Line 4 - 11. 해당 에디터가 생성될 때 갖게 될 옵션(사이즈, 언어, 콜백 등)들을 나열한다.
-Line 14. 우리는 이미지 업로드 콜백 메소드(onImageUpload)를 사용한다.
+Line 2. 에디터를 DOM(*#editor*)에 집어넣는다.
+Line 4 - 11. 해당 에디터가 생성될 때 갖게 될 옵션(*사이즈, 언어, 콜백 등*)들을 나열한다.
+Line 14. 우리는 이미지 업로드 콜백 메소드(*onImageUpload*)를 사용한다.
 
-#### onImageUpload 콜백 메소드
+#### onImageUpload() callback method
 ```js
 /**
 *
@@ -115,10 +115,10 @@ onImageUpload: function (files) {
 }
 ```
 
-에디터에서 사진을 추가하면 onImageUpload 이벤트가 실행되면서 파라미터로 파일 리스트가 넘어온다.
+에디터에서 사진을 추가하면 *onImageUpload* 이벤트가 실행되면서 파라미터로 파일 리스트가 넘어온다.
 넘어온 파일 데이터를 이미지 서비스 API에 보내면 된다.
 
-참고로 'onImageUpload'는 임의로 코딩한게 아니라 썸머노트에서 공식 지원해주는 메소드명이다.
+참고로 '*onImageUpload*'는 임의로 코딩한게 아니라 썸머노트에서 공식 지원해주는 메소드명이다.
 
 #### uploadImagesService
 ```js
