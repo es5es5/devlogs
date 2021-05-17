@@ -10,11 +10,20 @@
 [Summernote](https://summernote.org/) 를 비롯한 대부분의 오픈소스 위지위그 에디터에 이미지를 첨부하면 **base64로 인코딩** 되면서 첨부된다.<br>
 단순한 이미지 1개를 첨부한게 위 상황이다.
 
-## 2. Problem
-저렇게 엄청난 문자열 데이터를 **데이터베이스에 저장하는 것 자체도 문제**인데, http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때문에 **통신 자체가 안되는 경우**까지도 생긴다.
+## 2. Issue
+
+저렇게 엄청난 문자열 데이터를 **데이터베이스에 저장하는 것 자체도 문제**인데,
+
+http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때문에 **통신 자체가 안되는 경우**까지도 생긴다.
 
 ## 3. Solution
-해결법은 **AWS S3, MINIO 같은 스토리지 서버에 이미지를 저장**하고, 그 이미지를 API GET 하는 방법이다.
+해결법 여러가지다.
+
+1. MySQL 컨텐츠 필드 데이터 타입을 (varchar, Text, LongText) -> **Blob** 으로 변경
+2. Text 데이터 타입을 쓰려면, MySQL Database **max_allowed_packet** 를 넉넉하게 올린다. (<s>매우 권장하지 않음</s>)
+3. **AWS S3, MINIO 같은 스토리지 서버에 이미지를 저장**하고, 그 이미지를 API GET 하는 방법이다.
+
+우리가 알아볼 방법은 세번째 방법이다.
 
 ## 4. Process
 간단한 프로세스는 이렇다.
@@ -45,7 +54,7 @@
 [썸머노트 공식 홈페이지](https://summernote.org/)에서 이미지 업로드를 해보자.<br>
 *base64*로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br><br>
 
-썸머노트는 [onImageUpload 콜백 메소드](https://summernote.org/deep-dive/#onimageupload)로 이미지 업로드를 공식 지원해준다.
+썸머노트는 아래와 같이 [onImageUpload 콜백 메소드](https://summernote.org/deep-dive/#onimageupload)로 이미지 업로드를 공식 지원해준다.
 
 ```js
 // Override image upload handler(default: base64 dataURL on IMG tag). You can upload image to server or AWS
@@ -99,11 +108,11 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 21. },
 ```
 
-Line 2. 에디터를 DOM(*#editor*)에 집어넣는다.
-Line 4 - 11. 해당 에디터가 생성될 때 갖게 될 옵션(*사이즈, 언어, 콜백 등*)들을 나열한다.
-Line 14. 우리는 이미지 업로드 콜백 메소드(*onImageUpload*)를 사용한다.
+**Line 2.** 에디터를 DOM(*#editor*)에 집어넣는다.
+**Line 4 - 11.** 해당 에디터가 생성될 때 갖게 될 옵션(*사이즈, 언어, 콜백 등*)들을 나열한다.
+**Line 14.** 우리는 이미지 업로드 콜백 메소드(*onImageUpload*)를 사용한다.
 
-#### onImageUpload() callback method
+#### onImageUpload callback method
 ```js
 /**
 *
