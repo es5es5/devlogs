@@ -41,6 +41,7 @@
 
 ## 1. Summernote
 
+#### Just Try it !
 [썸머노트 공식 홈페이지](https://summernote.org/)에서 이미지 업로드를 해보자.<br>
 base64로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br><br>
 
@@ -64,4 +65,82 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
   // upload image to server and create imgNode...
   $summernote.summernote('insertNode', imgNode);
 });
+```
+
+#### Summernote 코딩해보자
+
+이제 실제 코드로 썸머노트에 이미지 업로드 API 를 탑재해보자.
+
+간단한 프로세스는 이렇다.
+1. 썸머노트 에디터 생성
+2. 에디터 생성할 때 이미지 업로드 콜백 메소드를 옵션으로 추가
+3. 에디터에서 이미지업로드
+4. 이미지 서비스에서 리턴받은 경로를 이미지 태그(&lt;img src="[이미지 API GET URL]"&gt;)로 만들어서  에디터에 컨텐츠에 추가
+
+참고로 썸머노트는 jQuery 기반으로 동작한다.
+
+```js
+ 1. summernoteInit () {
+ 2.   $('#editor').summernote({
+ 4.     // Editor Options
+ 5.     placeholder: '내용을 입력해주세요...',
+ 6.     tabsize: 2,
+ 7.     width: 200,
+ 8.     height: 100,
+ 9.     lang: 'ko-KR',
+10.     toolbar: [],
+11.     callbacks: {
+12.       // onImageUpload Method
+14.       onImageUpload: function (files) {
+15.         uploadSummernoteImageFile(files[0], this)
+16.       }
+17.     }
+18.   })
+21. },
+```
+
+Line 2. 에디터를 DOM(#editor)에 집어넣는다.
+Line 4 - 11. 해당 에디터가 생성될 때 갖게 될 옵션(사이즈, 언어, 콜백 등)들을 나열한다.
+Line 14. 우리는 이미지 업로드 콜백 메소드(onImageUpload)를 사용한다.
+
+#### onImageUpload 콜백 메소드
+```js
+/**
+*
+* @param { files } Array
+*
+*/
+onImageUpload: function (files) {
+  uploadImagesService(files[0], this)
+}
+```
+
+에디터에서 사진을 추가하면 onImageUpload 이벤트가 실행되면서 파라미터로 파일 리스트가 넘어온다.
+넘어온 파일 데이터를 이미지 서비스 API에 보내면 된다.
+
+참고로 'onImageUpload'는 임의로 코딩한게 아니라 썸머노트에서 공식 지원해주는 메소드명이다.
+
+#### uploadImagesService
+```js
+uploadImagesService (file, editor) {
+  let data = new FormData()
+  data.append('uploadFile', file)
+
+  let apiURL = `${this.ENV_HOMEPAGE}/common/smartimage`
+
+  this.$axios({
+    method: 'post',
+    url: apiURL,
+    data
+  }).then(result => {
+    $(editor).summernote('insertImage', `${this.ENV_HOMEPAGE}${result.data}`)
+  }).catch(error => {
+    console.error(error)
+  })
+},
+```
+
+#### insertImage
+```js
+$(editor).summernote('insertImage', `${this.ENV_HOMEPAGE}${result.data}`)
 ```
