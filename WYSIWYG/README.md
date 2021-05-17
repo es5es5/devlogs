@@ -3,11 +3,14 @@
 
 > &nbsp;
 > <img src="./images/base64.PNG">
+> <img src="./images/toast.png">
 >
 > *"에디터에 사진을 추가했더니 게시글 데이터가 미친듯이 올라갔어요 !"*
+> &nbsp;
+
 
 ## 1. Situation 🔍
-[Summernote](https://summernote.org/) 를 비롯한 대부분의 오픈소스 위지위그 에디터에 이미지를 첨부하면 **base64로 인코딩** 되면서 첨부된다.<br>
+[Summernote](https://summernote.org/)나 [Toast UI Editor](https://ui.toast.com/tui-editor)를 비롯한 대부분의 오픈소스 위지위그 에디터에 이미지를 첨부하면 **base64로 인코딩** 되면서 첨부된다.<br>
 단순한 이미지 1개를 첨부한게 위 상황이다.
 
 <s>저런게 2개, 3개.. 10개 이상이라면..?</s> 🤮
@@ -45,6 +48,7 @@ RDB(MySQL)인 경우 **데이터베이스 맥스 패킷이 초과**돼서 SELECT
 > <img src="./images/img_tag.png">
 >
 > *"이미지 태그 " &lt;img&gt; " 하나로 불러오니깐 깔끔하네 !"*
+> &nbsp;
 
 # HOW TO
 이번 일지에선 두 가지 에디터에서 내가 개발한 방식을 소개한다.
@@ -173,3 +177,6 @@ $(editor).summernote('insertImage', 이미지_URL)
 <hr>
 
 ## 2. Toast UI
+#### Just Try it too !
+[썸머노트 공식 홈페이지](https://summernote.org/)에서 이미지 업로드를 해보자.<br>
+*base64*로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br><br>
