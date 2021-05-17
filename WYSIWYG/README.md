@@ -17,11 +17,11 @@
 http 통신을 할 때 패킷이 감당할 수 없는 데이터를 보내기 때문에 **통신 자체가 안되는 경우**까지도 생긴다.
 
 ## 3. Solution
-해결법 여러가지다.
+해결방법은 여러가지다.
 
 1. MySQL 컨텐츠 필드 데이터 타입을 (varchar, Text, LongText) -> **Blob** 으로 변경
 2. Text 데이터 타입을 쓰려면, MySQL Database **max_allowed_packet** 를 넉넉하게 올린다. (<s>매우 권장하지 않음</s>)
-3. **AWS S3, MINIO 같은 스토리지 서버에 이미지를 저장**하고, 그 이미지를 API GET 하는 방법이다.
+3. AWS S3, MINIO 같은 **스토리지 서버에 이미지를 저장**하고, 그 이미지를 API GET 하는 방법이다.
 
 우리가 알아볼 방법은 세번째 방법이다.
 
@@ -108,15 +108,15 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 21. },
 ```
 
-**Line 2.** 에디터를 DOM(*#editor*)에 집어넣는다.
-**Line 4 - 11.** 해당 에디터가 생성될 때 갖게 될 옵션(*사이즈, 언어, 콜백 등*)들을 나열한다.
-**Line 14.** 우리는 이미지 업로드 콜백 메소드(*onImageUpload*)를 사용한다.
+**Line 2.** 에디터를 DOM(*#editor*)에 집어넣는다.<br>
+**Line 4 - 11.** 해당 에디터가 생성될 때 갖게 될 옵션(*사이즈, 언어, 콜백 등*)들을 나열한다.<br>
+**Line 14.** 우리는 이미지 업로드 콜백 메소드(*onImageUpload*)를 사용한다.<br>
 
 #### onImageUpload callback method
 ```js
 /**
 *
-* @param { files } Array
+* @param { files } Array 파일 객체 리스트
 *
 */
 onImageUpload: function (files) {
@@ -130,12 +130,22 @@ onImageUpload: function (files) {
 참고로 '*onImageUpload*'는 임의로 코딩한게 아니라 썸머노트에서 공식 지원해주는 메소드명이다.
 
 #### uploadImagesService
+
+이제 구축된 이미지 서비스에 파일을 업로드한다.
+나는 [axios](https://github.com/axios/axios)를 이용해서 http POST 를 보냈다.
+
 ```js
+/**
+*
+* @param { file } Object 파일 객체
+* @param { editor } Object 에디터 객체
+*
+*/
 uploadImagesService (file, editor) {
   let data = new FormData()
   data.append('uploadFile', file)
 
-  let apiURL = `${this.ENV_HOMEPAGE}/common/smartimage`
+  let apiURL = `${이미지서버}/common/smartimage`
 
   this.$axios({
     method: 'post',
@@ -149,7 +159,11 @@ uploadImagesService (file, editor) {
 },
 ```
 
+이제 이미지 서비스에서 리턴받은 URL 정보를 에디터 컨텐츠에 삽입해주면 끝이다.
+썸머노트는 insertImage 로 자체적으로 처리해준다.
+
+참 고마운 라이브러리다. 😁
 #### insertImage
 ```js
-$(editor).summernote('insertImage', `${this.ENV_HOMEPAGE}${result.data}`)
+$(editor).summernote('insertImage', [이미지_URL])
 ```
