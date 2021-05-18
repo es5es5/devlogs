@@ -178,5 +178,5 @@ $(editor).summernote('insertImage', 이미지_URL)
 
 ## 2. Toast UI
 #### Just Try it too !
-[썸머노트 공식 홈페이지](https://summernote.org/)에서 이미지 업로드를 해보자.<br>
-*base64*로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br><br>
+[Toast UI 공식 홈페이지](https://ui.toast.com/tui-editor)에서 이미지 업로드를 해보자.<br>
+썸머노트와 마찬가지로 *base64*로 인코딩해서 올라가는걸 바로 확인할 수 있다.<br>
