@@ -54,6 +54,7 @@ RDB(MySQL)인 경우 **데이터베이스 맥스 패킷이 초과**돼서 SELECT
 이번 일지에선 두 가지 에디터에서 내가 개발한 방식을 소개한다.
 
 <hr>
+
 ## 1. Summernote
 
 #### Just Try it !
