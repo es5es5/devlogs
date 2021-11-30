@@ -6,7 +6,7 @@
 &nbsp;&nbsp;최근에 이직한 회사<small>(나중에 이직 얘기도 쓰고싶다.)</small>에서 데스크탑 앱 서비스에 관심을 보이길래.<br>
 &nbsp;&nbsp;당당하게 외쳤다.
 
-$$Electron 　!$$
+> Electron !
 
 ## 2. Hello Electron!
 
@@ -14,7 +14,8 @@ $$Electron 　!$$
 
 
 > &nbsp;
-> <img src="./images/hello.png">
+> <img src="./images/hello.PNG">
+> <br>
 > <i>Hello Electron!<i>
 > &nbsp;
 
@@ -28,7 +29,8 @@ $$Electron 　!$$
 
 &nbsp;&nbsp;뼈속부터 Vue 개발자인 나는 프론트 스펙은 무조건 Vue를 채택한다. ~~React를 할 줄 모른다.~~
 
-####2-1. Electron + Vue
+  
+#### 2-1. Electron + Vue
 
 &nbsp;&nbsp;여러 자료 중 가장 눈에 띄는 자료는 [electron-vue](https://simulatedgreg.gitbooks.io/electron-vue/content/ko/)였다.
 
