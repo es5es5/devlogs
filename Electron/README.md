@@ -55,7 +55,7 @@
 
 [Vue CLI Plugin Electron Builder](https://nklayman.github.io/vue-cli-plugin-electron-builder/)
 
-&nbsp;&nbsp;기존 프로젝트에 해당 라이브러리만 추가해주면 된다. 정말 쉽다.
+&nbsp;&nbsp;기존 프로젝트에 해당 라이브러리만 추가해주면 된다. **정말 쉽다.**
 ```bash
 $ vue add electron-builder
 ```
@@ -67,4 +67,55 @@ $ vue add electron-builder
 > 기존 Vue 프로젝트를 쉽게 Electron 으로 띄웠다.
 > &nbsp;
 
-웹 서비스를 데스크탑 앱 서비스로 당장 런칭하고 싶다면, 이 방법을 적극 추천할 것이다.
+라이브러리를 추가하면 `src/background.js`이 생기는데, Electron의 `main.js` 역할을 하는 것으로 예상된다.
+
+웹 서비스를 **데스크탑 앱 서비스로 당장 런칭**하고 싶다면, 이 방법을 적극 추천할 것이다.
+
+#### 3. Electron Updater
+
+&nbsp;&nbsp;데스크탑 앱을 관심갖기 시작하면서 가장 궁금했던 부분이 어떻게 사용자한테 업데이트를 자동으로 시킬 수 있는가였다.
+Auto Updater와 GitHub Release를 이용해서 구현해보자.
+
+아래는 [공식문서](https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#auto-update)에 있는 내용을 옮긴 것이다. ~~공식문서 설명이 너무 부실하다.~~
+
+`vue.config.js` 에 Electron 빌드 옵션 `publish: ['github']`를 추가한다.
+
+```js
+module.exports = {
+  pluginOptions: {
+    electronBuilder: {
+      builderOptions: {
+        publish: ['github']
+      }
+    }
+  }
+}
+```
+
+`background.js` 에 Updater 를 추가한다.
+```js
+...
++  import { autoUpdater } from "electron-updater"
+...
+
+if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // Load the url of the dev server if in development mode
+    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+    if (!process.env.IS_TEST) win.webContents.openDevTools()
+  } else {
+    createProtocol('app')
+    // Load the index.html when not in development
+    win.loadURL('app://./index.html')
++   autoUpdater.checkForUpdatesAndNotify()
+  }
+...
+```
+
+[https://github.com/settings/tokens](https://github.com/settings/tokens) 에서 토큰을 만들어준다 `Generate new token`.
+
+OS 환경변수에 토큰 정보를 추가한다.
+
+```bash
+export GH_TOKEN=[내 토큰 정보]
+```
+
