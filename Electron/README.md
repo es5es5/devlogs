@@ -2,14 +2,14 @@
 
 <img src="./images/logo.png" width="100" style="display: block; margin: 2rem auto;" alt="logo">
 
-## 1. Electron 해보고 싶었어!
+## 0. Electron 해보고 싶었어!
 
 &nbsp;&nbsp;최근에 이직한 회사에서 데스크탑 앱 서비스에 관심을 보이길래.<br>
 &nbsp;&nbsp;당당하게 외쳤다.
 
 > Electron !
 
-## 2. Hello Electron!
+## 1. Hello Electron!
 
 &nbsp;&nbsp;[electron-quick-start](https://www.electronjs.org/docs/latest/tutorial/quick-start)를 이용해서 바로 시작해봤다. 역시 데스크탑 생태계 최상위 포식자답게 상세한 문서와 스타터팩을 지원한다. 한가지 아쉬운 점은 한글 문서가 없다는 점이다. ~~대한민국 일렉트론 개발자들 각성하라.~~
 
@@ -20,7 +20,7 @@
 > <i>Hello Electron!</i>
 > &nbsp;
 
-## 3. Vue 와의 궁합.
+## 2. Vue 와의 궁합.
 
 > JavaScript is EVERYWHERE !
 
@@ -78,7 +78,7 @@ Auto Updater와 GitHub Release를 이용해서 구현해보자.
 
 아래는 [공식문서](https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#auto-update)에 있는 내용을 옮긴 것이다. ~~공식문서 설명이 너무 부실하다.~~
 
-`vue.config.js` 에 Electron 빌드 옵션 `publish: ['github']`를 추가한다.
+###### 3-1. `vue.config.js` 에 Electron 빌드 옵션 `publish: ['github']`를 추가한다.
 
 ```js
 module.exports = {
@@ -92,7 +92,8 @@ module.exports = {
 }
 ```
 
-`background.js` 에 Updater 를 추가한다.
+###### 3-2. `background.js` 에 Updater 를 추가한다.
+
 ```js
 ...
 +  import { autoUpdater } from "electron-updater"
@@ -111,11 +112,52 @@ if (process.env.WEBPACK_DEV_SERVER_URL) {
 ...
 ```
 
-[https://github.com/settings/tokens](https://github.com/settings/tokens) 에서 토큰을 만들어준다 `Generate new token`.
+###### 3-3. [https://github.com/settings/tokens](https://github.com/settings/tokens) 에서 토큰을 만들어준다. `Generate new token`.
 
-OS 환경변수에 토큰 정보를 추가한다.
+###### 3-4. OS 환경변수에 토큰 정보를 추가한다.
 
 ```bash
-export GH_TOKEN=[내 토큰 정보]
+$ export GH_TOKEN=[내 토큰 정보]
 ```
 
+###### 3-5. Build Electron App!
+```bash
+$ npm run electron:build -- -p always
+
+$ yarn electron:build -p always
+```
+
+> &nbsp;
+> <img src="./images/build.png">
+> <br>
+> Windows 기준 빌드 결과물이다.
+> /dist_electron 아래에 생긴다.
+> &nbsp;
+
+###### 3-6. 빌드 결과물을 GitHub에 Release한다.
+
+> &nbsp;
+> <img src="./images/release.png">
+> <br>
+> Draft a new release !
+> &nbsp;
+
+###### 3-7. OS별로 아래 파일들을 `Assets` 에 넣어두면 된다.
+
+- Windows
+  - lastest.yml
+  - XXXX-Setup-[version].exe
+
+- MacOS
+  - lastest.yml
+  - XXXX-[version].dmg
+
+**Trouble Shooting**
+&nbsp;&nbsp;여기서 주의해야될 점은.
+&nbsp;&nbsp;설치 파일들의 파일명을 저렇게 수정해서 올려야된다는거다. 나같은 경우 Windows에서 빌드했을 때 `mbti-admin Setup 0.1.1.exe`로 결과물이 나왔는데, Release 에 올리면 `mbti-admin.Setup.0.1.1.exe` 로 바껴서 올라갔었다.<br>
+&nbsp;&nbsp;이 문제로 이틀동안 헤맸다...
+
+```bash
+에러내용
+Error: Cannot download "https://github.com/es5es5/mbti-admin-web/releases/download/v0.1.2/mbti-admin-Setup-0.1.2.exe", status 404: 
+```
