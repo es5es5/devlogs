@@ -1,4 +1,4 @@
-# Vue + Electron
+# Vue + Electron + Auto Updater
 
 <img src="./images/logo.png" width="100" style="display: block; margin: 2rem auto;" alt="logo">
 
@@ -11,7 +11,7 @@
 
 ## 1. Hello Electron!
 
-&nbsp;&nbsp;[electron-quick-start](https://www.electronjs.org/docs/latest/tutorial/quick-start)를 이용해서 바로 시작해봤다. 역시 데스크탑 생태계 최상위 포식자답게 상세한 문서와 스타터팩을 지원한다. 한가지 아쉬운 점은 한글 문서가 없다는 점이다. ~~대한민국 일렉트론 개발자들 각성하라.~~
+&nbsp;&nbsp;[electron-quick-start](https://www.electronjs.org/docs/latest/tutorial/quick-start)를 이용해서 바로 시작해봤다. 역시 데스크탑 생태계 최상위 포식자답게 상세한 문서와 스타터팩을 지원한다. 한 가지 아쉬운 점은 한글 문서가 없다는 점이다. ~~대한민국 일렉트론 개발자들 각성하라.~~
 
 
 > &nbsp;
@@ -25,11 +25,11 @@
 > JavaScript is EVERYWHERE !
 
 
-&nbsp;&nbsp;최근 웹개발 트렌드가 서버에서 클라이언트 쪽으로 대부분의 비즈니스 로직이 넘어오면서. 프론트엔드 프레임워크들의 위상이 매우 높아졌다. (React, Vue, ~~Angu어쩌구~~ 그리고 Svelte)<br>
+&nbsp;&nbsp;최근 웹 개발 트렌드가 서버에서 클라이언트 쪽으로 대부분의 비즈니스 로직이 넘어오면서. 프론트엔드 프레임워크들의 위상이 매우 높아졌다. (React, Vue, ~~Angu어쩌구~~ 그리고 Svelte)<br>
 &nbsp;&nbsp;요즘은 대부분의 서비스들의 화면 영역은 웹 기술을 이용한다. 프론트엔드 개발자는 이제 철밥통!(?)<br>
 &nbsp;&nbsp;이번에 얘기할 Electron 도 결국은 웹 기술을 이용한 **데스크탑 앱**을 만드는 기술이다.<br>
 
-&nbsp;&nbsp;뼈속부터 Vue 개발자인 나는 프론트 스펙은 무조건 Vue를 채택한다. ~~React를 할 줄 모른다.~~
+&nbsp;&nbsp;뼛속부터 Vue 개발자인 나는 프론트엔드 스펙은 무조건 Vue를 채택한다. ~~React를 할 줄 모른다.~~
 
 
 #### 2-1. electron-vue
@@ -50,12 +50,12 @@
 
 #### 2-2. Vue + Electron Builder
 
-&nbsp;&nbsp;앞서 얘기한 electron-vue가 Electron 위에 Vue 를 올린 느낌이라면. [Electron Builder](https://www.electron.build/) 는 기존 NPM 프로젝트에 electron 을 씌우는 느낌이다.
-&nbsp;&nbsp;Vue에서는 정말 유용하게도 Vue CLI 에서 지원해준다. (정말 최고!)
+&nbsp;&nbsp;앞서 얘기한 electron-vue가 Electron 위에 Vue를 올린 느낌이라면. [Electron Builder](https://www.electron.build/) 는 기존 NPM 프로젝트에 electron 을 씌우는 느낌이다.
+&nbsp;&nbsp;Vue에서는 정말 유용하게도 Vue CLI에서 지원해준다. (정말 최고!)
 
 [Vue CLI Plugin Electron Builder](https://nklayman.github.io/vue-cli-plugin-electron-builder/)
 
-&nbsp;&nbsp;기존 프로젝트에 해당 라이브러리만 추가해주면 된다. **정말 쉽다.**
+&nbsp;&nbsp;기존 Vue 프로젝트에 해당 라이브러리만 추가해주면 된다. **정말 쉽다.**
 ```bash
 $ vue add electron-builder
 ```
@@ -73,12 +73,12 @@ $ vue add electron-builder
 
 #### 3. Electron Updater
 
-&nbsp;&nbsp;데스크탑 앱을 관심갖기 시작하면서 가장 궁금했던 부분이 어떻게 사용자한테 업데이트를 자동으로 시킬 수 있는가였다.
+&nbsp;&nbsp;데스크탑 앱을 관심 갖기 시작하면서 가장 궁금했던 부분이 어떻게 사용자한테 업데이트를 자동으로 시킬 수 있는가였다.
 Auto Updater와 GitHub Release를 이용해서 구현해보자.
 
-아래는 [공식문서](https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#auto-update)에 있는 내용을 옮긴 것이다. ~~공식문서 설명이 너무 부실하다.~~
+아래는 [공식 문서](https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/recipes.html#auto-update)에 있는 내용을 옮긴 것이다. ~~공식 문서 설명이 너무 부실하다.~~
 
-###### 3-1. `vue.config.js` 에 Electron 빌드 옵션 `publish: ['github']`를 추가한다.
+###### 3-1. `vue.config.js`에 Electron 빌드 옵션 `publish: ['github']`를 추가한다.
 
 ```js
 module.exports = {
@@ -92,7 +92,7 @@ module.exports = {
 }
 ```
 
-###### 3-2. `background.js` 에 Updater 를 추가한다.
+###### 3-2. `background.js`에 Updater를 추가한다.
 
 ```js
 ...
@@ -112,9 +112,9 @@ if (process.env.WEBPACK_DEV_SERVER_URL) {
 ...
 ```
 
-###### 3-3. [https://github.com/settings/tokens](https://github.com/settings/tokens) 에서 토큰을 만들어준다. `Generate new token`.
+###### 3-3. [https://github.com/settings/tokens](https://github.com/settings/tokens)에서 토큰을 만들어준다. `Generate new token`.
 
-###### 3-4. OS 환경변수에 토큰 정보를 추가한다.
+###### 3-4. OS 환경 변수에 토큰 정보를 추가한다.
 
 ```bash
 $ export GH_TOKEN=[내 토큰 정보]
@@ -142,7 +142,7 @@ $ yarn electron:build -p always
 > Draft a new release !
 > &nbsp;
 
-###### 3-7. OS별로 아래 파일들을 `Assets` 에 넣어두면 된다.
+###### 3-7. OS별로 아래 파일들을 `Assets`에 넣어두면 된다.
 
 - Windows
   - lastest.yml
@@ -152,10 +152,9 @@ $ yarn electron:build -p always
   - lastest.yml
   - XXXX-[version].dmg
 
-**Trouble Shooting**
-&nbsp;&nbsp;여기서 주의해야될 점은.
-&nbsp;&nbsp;설치 파일들의 파일명을 저렇게 수정해서 올려야된다는거다. 나같은 경우 Windows에서 빌드했을 때 `mbti-admin Setup 0.1.1.exe`로 결과물이 나왔는데, Release 에 올리면 `mbti-admin.Setup.0.1.1.exe` 로 바껴서 올라갔었다.<br>
-&nbsp;&nbsp;이 문제로 이틀동안 헤맸다...
+***Trouble Shooting**<br>
+&nbsp;&nbsp;여기서 주의해야 될 점은.
+&nbsp;&nbsp;설치 파일들의 파일명을 저렇게 수정해서 올려야 된다는 거다. 나의 경우 Windows에서 빌드 했을 때 `mbti-admin Setup 0.1.1.exe`로 결과물이 나왔는데, Release에 올리면 `mbti-admin.Setup.0.1.1.exe`로 바뀌어서 올라갔었다. ~~이 문제로 이틀 동안 헤맸다...~~
 
 ```bash
 에러내용
