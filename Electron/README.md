@@ -161,7 +161,7 @@ $ yarn electron:build -p always
 Error: Cannot download "https://github.com/es5es5/mbti-admin-web/releases/download/v0.1.2/mbti-admin-Setup-0.1.2.exe", status 404: 
 ```
 
-lastest.yml에 file 정보가 `mbti-admin-Setup-0.1.2.exe` 로 돼있는걸 확인할 수 있다.
+lastest.yml에 file 정보가 `mbti-admin-Setup-0.1.2.exe`로 돼있는 걸 확인할 수 있다.
 ```yml
 version: 0.1.2
 files:
@@ -181,7 +181,12 @@ releaseDate: '2021-12-10T02:54:45.988Z'
 > <img src="./images/electron_updater.gif">
 > <br>
 > 업데이트 하시겠습니까?
+> <br>
 > 네!!!!
 > <br>
-> 왼쪽 하단에 버전정보를 써뒀다. <i>(v0.1.2 → v0.1.3)</i>
+> <br>
+> 왼쪽 하단에 버전정보를 써뒀다. (<i>v0.1.2</> → v0.1.3)</i>
 > &nbsp;
+
+#### 5. 참고자료
+ - https://junglow9.tistory.com/7
