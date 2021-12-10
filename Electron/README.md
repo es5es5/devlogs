@@ -11,7 +11,7 @@
 
 ## 1. Hello Electron!
 
-&nbsp;&nbsp;[electron-quick-start](https://www.electronjs.org/docs/latest/tutorial/quick-start)를 이용해서 바로 시작해봤다. 역시 데스크탑 생태계 최상위 포식자답게 상세한 문서와 스타터팩을 지원한다. 한 가지 아쉬운 점은 한글 문서가 없다는 점이다. ~~대한민국 일렉트론 개발자들 각성하라.~~
+&nbsp;&nbsp;[electron-quick-start](https://www.electronjs.org/docs/latest/tutorial/quick-start)를 이용해서 바로 시작해봤다. 역시 데스크탑앱 생태계 최상위 포식자답게 상세한 문서와 스타터팩을 지원한다. 한 가지 아쉬운 점은 한글 문서가 없다는 점이다. ~~대한민국 일렉트론 개발자들 각성하라.~~
 
 
 > &nbsp;
@@ -25,9 +25,9 @@
 > JavaScript is EVERYWHERE !
 
 
-&nbsp;&nbsp;최근 웹 개발 트렌드가 서버에서 클라이언트 쪽으로 대부분의 비즈니스 로직이 넘어오면서. 프론트엔드 프레임워크들의 위상이 매우 높아졌다. (React, Vue, ~~Angu어쩌구~~ 그리고 Svelte)<br>
+&nbsp;&nbsp;최근 웹 개발 트렌드가 서버에서 클라이언트 쪽으로 대부분의 비즈니스 로직이 넘어오면서. 프론트엔드 프레임워크들의 위상이 매우 높아졌다.(React, Vue, ~~Angu어쩌구~~ 그리고 Svelte)<br>
 &nbsp;&nbsp;요즘은 대부분의 서비스들의 화면 영역은 웹 기술을 이용한다. 프론트엔드 개발자는 이제 철밥통!(?)<br>
-&nbsp;&nbsp;이번에 얘기할 Electron 도 결국은 웹 기술을 이용한 **데스크탑 앱**을 만드는 기술이다.<br>
+&nbsp;&nbsp;이번에 얘기할 Electron도 결국은 웹 기술을 이용한 **데스크탑 앱**을 만드는 기술이다.<br>
 
 &nbsp;&nbsp;뼛속부터 Vue 개발자인 나는 프론트엔드 스펙은 무조건 Vue를 채택한다. ~~React를 할 줄 모른다.~~
 
@@ -46,11 +46,11 @@
 > Electron 버전이 2 ... ?
 > &nbsp;
 
-현재 시점으로 Electron stable 은 13이다.. (18까지도 개발 중) 버전이 너무 ~~구닥다리~~라서 바로 손절했다.
+현재 시점으로 Electron stable은 13이다..(18까지도 개발 중) 버전이 너무 ~~구닥다리~~라서 바로 손절했다.
 
 #### 2-2. Vue + Electron Builder
 
-&nbsp;&nbsp;앞서 얘기한 electron-vue가 Electron 위에 Vue를 올린 느낌이라면. [Electron Builder](https://www.electron.build/) 는 기존 NPM 프로젝트에 electron 을 씌우는 느낌이다.
+&nbsp;&nbsp;앞서 얘기한 electron-vue가 Electron 위에 Vue를 올린 느낌이라면. [Electron Builder](https://www.electron.build/) 는 기존 NPM 프로젝트에 Electron을 씌우는 느낌이다.
 &nbsp;&nbsp;Vue에서는 정말 유용하게도 Vue CLI에서 지원해준다. (정말 최고!)
 
 [Vue CLI Plugin Electron Builder](https://nklayman.github.io/vue-cli-plugin-electron-builder/)
@@ -64,10 +64,10 @@ $ vue add electron-builder
 > &nbsp;
 > <img src="./images/mbti.png">
 > <br>
-> 기존 Vue 프로젝트를 쉽게 Electron 으로 띄웠다.
+> 기존 Vue프로젝트를 쉽게 Electron으로 띄웠다.
 > &nbsp;
 
-라이브러리를 추가하면 `src/background.js`이 생기는데, Electron의 `main.js` 역할을 하는 것으로 예상된다.
+라이브러리를 추가하면 `src/background.js`이 생기는데, Electron의 `main.js`역할을 하는 것으로 예상된다.
 
 웹 서비스를 **데스크탑 앱 서비스로 당장 런칭**하고 싶다면, 이 방법을 적극 추천할 것이다.
 
@@ -185,7 +185,7 @@ releaseDate: '2021-12-10T02:54:45.988Z'
 > 네!!!!
 > <br>
 > <br>
-> 왼쪽 하단에 버전정보를 써뒀다. (<i>v0.1.2</> → v0.1.3)</i>
+> 왼쪽 하단에 버전정보를 써뒀다. (<i>v0.1.2</i> → <i>v0.1.3</i>)
 > &nbsp;
 
 #### 5. 참고자료
