@@ -16,7 +16,7 @@
 
 ## 1. Hello Vite!
 
-&nbsp;&nbsp;[Scaffolding Your First Vite Project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) 공식 홈페이지를 따라 바로 만들어보자.
+&nbsp;&nbsp;[Scaffolding Your First Vite Project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) 공식 홈페이지를 따라 바로 만들어보자.<br>
 &nbsp;&nbsp;역시 뼛속부터 Vue 개발자인 나는 무조건 Vue 로 선택했다.
 
 ```bash
@@ -32,7 +32,7 @@ Done. Now run:
 &nbsp;&nbsp; 프로젝트가 만들어지는 속도에서 이미 놀랐다. 물론, 프로젝트 세팅 선택영역이 없는 것도 한 몫한다.
 
 #### 1-1. packages.json
-> <img src="./images/package_vite.png" width="50%" style="display: inline-block; float: left" alt="logo">
+> <img src="./images/package_vite.png" width="49%" style="display: inline-block; float: left" alt="logo">
 > <img src="./images/package_cli.png" width="50%" style="display: inline-block; float: left" alt="logo">
 > <br>
 > Vite(왼쪽), CLI(오른쪽) Default Vue3 기준.<br>
@@ -42,7 +42,8 @@ Done. Now run:
 ## 2. webpack-to-vite.
 
 #### 2-0. Brilliant LEGACY.
-&nbsp;&nbsp;나는 지금까지 많은 신기술들을 소개할 때, 이게 짱짱 좋으니 다음 프로젝트에선 이걸 도입해봐! 라는 식이 많았다. 하지만 현실은 그렇지 않다. 기존 프로젝트도 버거운걸!
+&nbsp;&nbsp;나는 지금까지 많은 신기술들을 소개할 때, 이게 짱짱 좋으니 다음 프로젝트에선 이걸 도입해봐! 라는 식이 많았다.<br>
+하지만 현실은 그렇지 않다. 기존 프로젝트도 버거운걸!
 
 #### 5. 참고자료
  -
